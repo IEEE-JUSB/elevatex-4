@@ -20,7 +20,7 @@ export default function Schedule() {
       {/* Header */}
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-6xl font-syne font-bold">
-          ElevateX 4.0 - <span className="text-blue-600">Schedule</span>
+          ElevateX 4.0 - <span className="text-[#7A62C6]">Schedule</span>
         </h1>
       </div>
 
@@ -34,7 +34,7 @@ export default function Schedule() {
             {/* Speaker Detail Row */}
             <div className="flex flex-col items-center gap-4 mb-3 font-sans">
               <div>
-                <p className="text-blue-600 text-sm sm:text-lg font-syne font-medium">
+                <p className="text-purple-600 text-sm sm:text-lg font-syne font-medium">
                   {seminar.date}
                 </p>
                 <p className="text-sm sm:text-xl font-semibold text-gray-800">

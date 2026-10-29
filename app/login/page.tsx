@@ -45,7 +45,7 @@ export default function LoginPage() {
 
   return (
       <div className="sm:min-h-screen flex flex-col md:flex-row">
-        <div className="w-full bg-gradient-to-br from-blue-300 to-blue-400 p-12 pt-0 flex flex-col items-center justify-around">
+        <div className="w-full bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] p-12 pt-0 flex flex-col items-center justify-around">
           <Link href={"/"}>
             <Image src={"/elevatex-logo.png"} alt="ElevateX 4.0 Logo" height={200} width={400} className="aspect-video object-contain" />
           </Link>
@@ -69,7 +69,7 @@ export default function LoginPage() {
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                   placeholder="johndoe@email.com"
-                  className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                  className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
                 />
               </div>
 
@@ -83,7 +83,7 @@ export default function LoginPage() {
                   value={formData.password}
                   onChange={(e) => handleChange("password", e.target.value)}
                   placeholder="Enter password"
-                  className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                  className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
                 />
               </div>
 
@@ -94,7 +94,7 @@ export default function LoginPage() {
               <div className="pt-4">
                 <button
                   onClick={handleSubmit}
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 cursor-pointer"
+                  className="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 cursor-pointer"
                   disabled={status==="Loading..."}
                 >
                   Login

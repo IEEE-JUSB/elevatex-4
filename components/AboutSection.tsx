@@ -14,7 +14,7 @@ export default function AboutSection() {
             <div className="wow animate__animated animate__fadeInLeft">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight">
                 <div className="text-left">Where</div>
-                <div className="text-left ml-8 sm:ml-12 md:ml-16 lg:ml-45"><span className="text-blue-600">Innovation</span></div>
+                <div className="text-left ml-8 sm:ml-12 md:ml-16 lg:ml-45"><span className="text-[#4411C6]">Innovation</span></div>
                 <div className="text-left">Meets Action</div>
               </h1>
             </div>

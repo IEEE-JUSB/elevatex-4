@@ -16,7 +16,7 @@ import {
 function ElevatexFooter() {
   return (
     <>
-      <div className="bg-gradient-to-b from-blue-700 to-blue-900 text-white w-full p-10 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-around md:text-lg space-y-10 md:space-y-0 font-syne">
+      <div className="bg-gradient-to-b from-[#6236A8] to-[#1B1842] text-white w-full p-10 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-around md:text-lg space-y-10 md:space-y-0 font-syne">
         
         <div className="w-auto mb-10 md:mb-0">
           <div className="text-center mb-4">
@@ -78,7 +78,7 @@ function ElevatexFooter() {
         </div>
       </div>
 
-      <div className="flex w-full justify-center bg-blue-900">
+      <div className="flex w-full justify-center bg-[#1B1842]">
         <p className="text-white p-3 text-center font-syne border-t border-t-white/70 w-full sm:w-4/5">
           Made with &#10084; by IEEE JUSB
         </p>

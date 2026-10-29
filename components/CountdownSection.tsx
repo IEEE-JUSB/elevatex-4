@@ -71,7 +71,7 @@ export default function CountdownSection() {
           {value}
         </span>
       </div>
-      <span className="text-blue-400 text-xs md:text-sm font-semibold tracking-wider mt-1">
+      <span className="text-[#4411C6] text-xs md:text-sm font-semibold tracking-wider mt-1">
         {timeLabels[index]}
       </span>
     </div>
@@ -89,7 +89,7 @@ export default function CountdownSection() {
             {targetDateString}
           </span>
           {/* Faded mirror text */}
-          <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-400 opacity-20 -mt-1 transform scale-y-[-1] tracking-wide">
+          <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-400 opacity-20 -mt-1 transform scale-y-[-1] tracking-wide">
             {targetDateString}
           </span>
         </div>

@@ -63,7 +63,7 @@ const Speakers: React.FC = () => {
   ];
 
   return (
-    <div id="speakers" className="min-h-screen">
+    <div id="speakers" className="min-h-screen pt-10">
       <h1 className="w-full text-center text-6xl font-bold mt-3 font-syne">
         Speakers
       </h1>

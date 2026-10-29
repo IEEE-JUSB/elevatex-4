@@ -38,8 +38,51 @@ interface UserType {
 
 function ClientCode({ user }:{user: UserType}) {
   //   const { data, isPending } = useSession();
-  const [registeredEvents, setRegisteredEvents] = useState<EventType[]>();
-  const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>();
+  const [registeredEvents, setRegisteredEvents] = useState<EventType[]>([
+    {
+      id: "sample-registered-1",
+      name: "Product Design Workshop",
+      eventDate: "Fri Oct 30 2026",
+      registrationsOpen: true,
+      registered: true,
+      eventUrl: "https://example.com/product-design-workshop",
+    },
+    {
+      id: "sample-registered-2",
+      name: "Building with Generative AI",
+      eventDate: "Sun Nov 01 2026",
+      registrationsOpen: true,
+      registered: true,
+      eventUrl: null,
+    },
+  ]);
+  const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([
+    {
+      id: "sample-upcoming-1",
+      name: "Career Planning for Engineers",
+      eventDate: "Mon Nov 02 2026",
+      registrationsOpen: true,
+      registered: false,
+      eventUrl: null,
+    },
+    {
+      id: "sample-upcoming-2",
+      name: "Open Source: Getting Started",
+      eventDate: "Sun Nov 08 2026",
+      registrationsOpen: true,
+      registered: false,
+      eventUrl: null,
+    },
+    {
+      id: "sample-upcoming-3",
+      name: "Machine Learning in Practice",
+      eventDate: "Sun Nov 15 2026",
+      registrationsOpen: false,
+      registered: false,
+      eventUrl: null,
+    },
+  ]);
+  //deletelater sample events
   const [eventsLoading, setEventsLoading] = useState<boolean>(true);
   const [registering, setRegistering] = useState<boolean>(false);
   const router = useRouter();
@@ -87,7 +130,7 @@ function ClientCode({ user }:{user: UserType}) {
 //     );
 
   return (
-    <div className="relative font-syne min-h-screen bg-gradient-to-br from-blue-300 to-blue-400 flex flex-col items-center gap-y-4 p-12">
+    <div className="relative font-syne min-h-screen bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] flex flex-col items-center gap-y-4 p-12">
       <Link
         href={"/"}
         className="cursor-pointer hover:scale-105 transition duration-300"
@@ -155,7 +198,9 @@ function ClientCode({ user }:{user: UserType}) {
                 <p>{e.name}</p>
                 <p>{e.eventDate}</p>
                 <button
-                  className="bg-blue-400 py-1 px-2 rounded-md cursor-pointer hover:bg-blue-500 transition-colors duration-300"
+                  className="bg-purple-400
+                  w-full
+                  py-1 px-2 rounded-md cursor-pointer hover:bg-blue-500 transition-colors duration-300"
                   onClick={() => handleRegister(e.id, user.id)}
                   disabled={registering || e.registrationsOpen === false}
                 >

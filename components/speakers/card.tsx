@@ -10,13 +10,15 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ image, name, url, designation }) => (
-  <div className="rounded-2xl w-full aspect-square max-w-xs md:max-w-sm lg:max-w-md relative">
+  <div className="rounded-2xl w-full aspect-square max-w-xs md:max-w-sm lg:max-w-md relative overflow-hidden">
     <Image
       width={500}
       height={500}
       src={image}
       alt={name}
-      className="w-full h-auto rounded-2xl mb-3 mx-auto absolute aspect-square object-cover"
+      className="w-full h-auto rounded-2xl mb-3 mx-auto absolute aspect-square object-cover
+      transition-transform duration-300 hover:scale-105
+      "
     />
     <Link
       href={url}
