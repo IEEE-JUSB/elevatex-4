@@ -36,7 +36,7 @@ interface UserType {
   phone: string;
 }
 
-function ClientCode({ user }:{user: UserType}) {
+function ClientCode({ user }: { user: UserType }) {
   //   const { data, isPending } = useSession();
   const [registeredEvents, setRegisteredEvents] = useState<EventType[]>([
     {
@@ -122,12 +122,12 @@ function ClientCode({ user }:{user: UserType}) {
     });
   }, [user, router]);
 
-//   if (isPending || !data || !data.session)
-//     return (
-//       <div className="min-h-screen bg-gradient-to-br from-blue-300 to-blue-400 grid place-items-center w-full">
-//         <h1 className="text-4xl font-bold font-syne">Loading...</h1>
-//       </div>
-//     );
+  //   if (isPending || !data || !data.session)
+  //     return (
+  //       <div className="min-h-screen bg-gradient-to-br from-blue-300 to-blue-400 grid place-items-center w-full">
+  //         <h1 className="text-4xl font-bold font-syne">Loading...</h1>
+  //       </div>
+  //     );
 
   return (
     <div className="relative font-syne min-h-screen bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] flex flex-col items-center gap-y-4 p-12">

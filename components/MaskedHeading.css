@@ -17,7 +17,7 @@
 }
 
 .masked-heading__word:not(:last-child)::after {
-  content: ' ';
+  content: " ";
 }
 
 .masked-heading__baseline {

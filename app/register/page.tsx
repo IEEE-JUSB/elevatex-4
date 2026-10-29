@@ -24,23 +24,23 @@ export default function RegisterPage() {
   const handleSendOtp = () => {
     setStatus("Sending OTP...");
     setOtpSent(true);
-    emailOtp.sendVerificationOtp({
-      email: formData.email,
-      type: "email-verification"
-    })
-    .then(()=>{
-      setStatus("Email sent with OTP.");
-    })
-  }
+    emailOtp
+      .sendVerificationOtp({
+        email: formData.email,
+        type: "email-verification",
+      })
+      .then(() => {
+        setStatus("Email sent with OTP.");
+      });
+  };
 
   const handleSubmitOtp = () => {
     setStatus("Loading...");
-    handleSignup(otp, formData)
-    .then(res => {
+    handleSignup(otp, formData).then((res) => {
       setStatus(res.message);
-      if(res.ok) redirect("/dashboard")
-    })
-  }
+      if (res.ok) redirect("/dashboard");
+    });
+  };
 
   const handleSubmit = () => {
     const formValidity = validateForm(formData);
@@ -72,8 +72,11 @@ export default function RegisterPage() {
             If you&apos;re seeing this, your email isn&apos;t verified.
           </p>
           <p>Email Address: {formData.email}</p>
-          <button className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
-          onClick={()=>handleSendOtp()} disabled={otpSent}>
+          <button
+            className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
+            onClick={() => handleSendOtp()}
+            disabled={otpSent}
+          >
             Send OTP
           </button>
           <input
@@ -83,14 +86,16 @@ export default function RegisterPage() {
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
           />
-          <button className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
-          onClick={()=>handleSubmitOtp()} disabled={status === "Loading..."}>
+          <button
+            className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
+            onClick={() => handleSubmitOtp()}
+            disabled={status === "Loading..."}
+          >
             Submit OTP
           </button>
           <p>{status}</p>
         </div>
       </dialog>
-
 
       <div className="w-full bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] p-12 flex flex-col justify-center overflow-y-auto font-syne">
         <div className="max-w-md mx-auto w-full py-8">

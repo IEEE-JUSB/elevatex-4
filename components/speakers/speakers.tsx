@@ -10,56 +10,56 @@ interface Speaker {
 
 const Speakers: React.FC = () => {
   const speakers: Speaker[] = [
-      {
+    {
       image: "/speakers/raman.jpg",
       name: "Raman Trivedi",
       url: "https://linkedin.com/in/raman-trivedi-530a871a5/",
-      designation: "City Head at Jamboree Education India"
+      designation: "City Head at Jamboree Education India",
     },
-  
+
     {
       image: "/speakers/soumyadeep.jpeg",
       name: "Soumyadeep Pal",
       url: "https://www.linkedin.com/in/realspal/",
-      designation: "CAT 99.9 percentile, IIM Calcutta"
+      designation: "CAT 99.9 percentile, IIM Calcutta",
     },
     {
       image: "/speakers/sayandeep.jpeg",
       name: "Sayandeep Sarkar",
       url: "https://www.linkedin.com/in/sayandeep-sarkar-530688201/",
-      designation: "Software Engineer @ ICICI Bank"
+      designation: "Software Engineer @ ICICI Bank",
     },
     {
       image: "/speakers/nandini.JPG",
       name: "Nandini Bagga",
       url: "https://www.linkedin.com/in/nandini-bagga-0803/",
-      designation: "Software Engineer in Tokyo"
+      designation: "Software Engineer in Tokyo",
     },
     {
       image: "/speakers/rahul.jpeg",
       name: "Rahul Haldar",
       url: "https://www.linkedin.com/in/rahul-halder-95a7ab147/",
-      designation: "Associate Consultant @ PWC"
+      designation: "Associate Consultant @ PWC",
     },
     {
       image: "/speakers/pani_da.jpg",
       name: "Saptarshi Pani",
       url: "https://www.linkedin.com/in/panisap/",
-      designation: "Chief Data and Research Scientist @ Alchemyst AI"
+      designation: "Chief Data and Research Scientist @ Alchemyst AI",
     },
     {
       image: "/speakers/ansh.jpg",
       name: "Ansh Sarkar",
       url: "https://www.linkedin.com/in/ansh-sarkar/",
-      designation: "Angle Mentor C4GT'25, Mentee C4GT'22, Intern- MITACS, IISc, LinkedIn"
+      designation:
+        "Angle Mentor C4GT'25, Mentee C4GT'22, Intern- MITACS, IISc, LinkedIn",
     },
     {
       image: "/speakers/punit.jpg",
       name: "Punit Chawla",
       url: "https://youtube.com/@punitchawla?si=FbP6lm6Ke5LgnR3c",
-      designation: "Founder, Designwings UX/UI School"
+      designation: "Founder, Designwings UX/UI School",
     },
-    
   ];
 
   return (

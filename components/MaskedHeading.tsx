@@ -1,14 +1,23 @@
-'use client';
+"use client";
 
-import React, { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef } from 'react';
-import type { CSSProperties, ElementType } from 'react';
-import { gsap } from 'gsap';
+import React, {
+  useCallback,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
+import type { CSSProperties, ElementType } from "react";
+import { gsap } from "gsap";
 
-import './MaskedHeading.css';
+import "./MaskedHeading.css";
 
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-const clamp = (v: number, a: number, b: number): number => (v < a ? a : v > b ? b : v);
+const clamp = (v: number, a: number, b: number): number =>
+  v < a ? a : v > b ? b : v;
 
 const SPOT_MASK = `radial-gradient(circle var(--mh-spot-r, 160px) at var(--mh-spot-x, 50%) var(--mh-spot-y, 50%), ${Array.from(
   { length: 9 },
@@ -16,16 +25,16 @@ const SPOT_MASK = `radial-gradient(circle var(--mh-spot-r, 160px) at var(--mh-sp
     const t = i / 8;
     const u = clamp((t - 0.1) / 0.9, 0, 1);
     return `rgba(0, 0, 0, ${(u * u * u * (u * (u * 6 - 15) + 10)).toFixed(3)}) ${(t * 100).toFixed(1)}%`;
-  }
-).join(', ')})`;
+  },
+).join(", ")})`;
 
-type Reveal = 'rise' | 'scale' | 'blur' | 'wipe' | 'fade' | 'none';
-type Trigger = 'view' | 'mount' | 'hover';
+type Reveal = "rise" | "scale" | "blur" | "wipe" | "fade" | "none";
+type Trigger = "view" | "mount" | "hover";
 
 export interface MaskedHeadingProps {
   text?: string;
   tag?: ElementType;
-  mediaType?: 'image' | 'video';
+  mediaType?: "image" | "video";
   src?: string;
   poster?: string;
   fillScale?: number;
@@ -45,7 +54,7 @@ export interface MaskedHeadingProps {
   duration?: number;
   stagger?: number;
   trigger?: Trigger;
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
   weight?: number;
   tracking?: number;
   lineHeight?: number;
@@ -83,11 +92,11 @@ interface GlyphState {
 }
 
 const MaskedHeading: React.FC<MaskedHeadingProps> = ({
-  text = 'Designed in the details',
-  tag = 'h2',
-  mediaType = 'image',
-  src = '',
-  poster = '',
+  text = "Designed in the details",
+  tag = "h2",
+  mediaType = "image",
+  src = "",
+  poster = "",
   fillScale = 1.25,
   parallax = 26,
   drift = 18,
@@ -95,22 +104,22 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
   brightness = 1,
   saturation = 1,
   grayscale = false,
-  tint = '',
+  tint = "",
   spotlight = false,
   spotlightRadius = 160,
   outline = false,
-  outlineColor = '',
+  outlineColor = "",
   outlineWidth = 1,
-  reveal = 'rise',
+  reveal = "rise",
   duration = 1.1,
   stagger = 0.09,
-  trigger = 'view',
-  align = 'center',
+  trigger = "view",
+  align = "center",
   weight = 700,
   tracking = -0.03,
   lineHeight = 1.06,
   textScale = 0.115,
-  className = '',
+  className = "",
   style,
   ...rest
 }: MaskedHeadingProps) => {
@@ -126,13 +135,31 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
   const boxesRef = useRef<GlyphBox[]>([]);
   const statesRef = useRef<GlyphState[]>([]);
   const tweenRef = useRef<gsap.core.Animation | null>(null);
-  const offsetRef = useRef({ x: 0, y: 0, tx: 0, ty: 0, zoom: 0, px: 0, py: 0, sx: 0, sy: 0, lit: false });
-  const paintRef = useRef({ transform: '', filter: '', spot: '' });
+  const offsetRef = useRef({
+    x: 0,
+    y: 0,
+    tx: 0,
+    ty: 0,
+    zoom: 0,
+    px: 0,
+    py: 0,
+    sx: 0,
+    sy: 0,
+    lit: false,
+  });
+  const paintRef = useRef({ transform: "", filter: "", spot: "" });
   const wakeRef = useRef<() => void>(() => {});
 
-  const clipId = `mh-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
-  const words = useMemo(() => String(text).split(/\s+/).filter(Boolean), [text]);
-  const glyphs = useMemo(() => words.flatMap((word, w) => Array.from(word).map(char => ({ char, w }))), [words]);
+  const clipId = `mh-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
+  const words = useMemo(
+    () => String(text).split(/\s+/).filter(Boolean),
+    [text],
+  );
+  const glyphs = useMemo(
+    () =>
+      words.flatMap((word, w) => Array.from(word).map((char) => ({ char, w }))),
+    [words],
+  );
 
   const settingsRef = useRef<Settings>({
     fillScale: 1,
@@ -143,7 +170,7 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     saturation: 1,
     grayscale: false,
     textScale: 0.115,
-    spotlight: false
+    spotlight: false,
   });
   settingsRef.current = {
     fillScale,
@@ -154,7 +181,7 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     saturation,
     grayscale,
     textScale,
-    spotlight
+    spotlight,
   };
 
   const place = useCallback(() => {
@@ -168,7 +195,7 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     const maxY = Math.max(0, ((scale - 1) / 2) * root.clientHeight);
 
     const transform = `translate3d(${clamp(off.x, -maxX, maxX).toFixed(2)}px, ${clamp(off.y, -maxY, maxY).toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
-    const filter = `brightness(${s.brightness}) saturate(${s.saturation})${s.grayscale ? ' grayscale(1)' : ''}`;
+    const filter = `brightness(${s.brightness}) saturate(${s.saturation})${s.grayscale ? " grayscale(1)" : ""}`;
     const paint = paintRef.current;
     if (paint.transform !== transform) {
       paint.transform = transform;
@@ -184,8 +211,8 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
       const spot = `${off.sx.toFixed(1)}px ${off.sy.toFixed(1)}px`;
       if (paint.spot !== spot) {
         paint.spot = spot;
-        clip.style.setProperty('--mh-spot-x', `${off.sx.toFixed(1)}px`);
-        clip.style.setProperty('--mh-spot-y', `${off.sy.toFixed(1)}px`);
+        clip.style.setProperty("--mh-spot-x", `${off.sx.toFixed(1)}px`);
+        clip.style.setProperty("--mh-spot-y", `${off.sy.toFixed(1)}px`);
       }
     }
   }, []);
@@ -199,13 +226,16 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
       const box = boxes[i];
       const st = states[i];
       if (!box || !st || (st.x === 0 && st.y === 0 && st.s === 1)) {
-        if (glyph.hasAttribute('transform')) glyph.removeAttribute('transform');
+        if (glyph.hasAttribute("transform")) glyph.removeAttribute("transform");
         continue;
       }
       const s = Math.max(st.s, 0.0001);
       const tx = box.cx * (1 - s) + st.x * (box.cx - box.lc);
       const ty = box.cy * (1 - s) + st.y;
-      glyph.setAttribute('transform', `translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${s.toFixed(4)})`);
+      glyph.setAttribute(
+        "transform",
+        `translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${s.toFixed(4)})`,
+      );
     }
   }, []);
 
@@ -230,7 +260,7 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
       const base = baseRefs.current[w];
       const node = box?.firstChild as Text | null | undefined;
       if (!box || !base || !node || node.nodeType !== 3) {
-        index += Array.from(box?.textContent ?? '').length;
+        index += Array.from(box?.textContent ?? "").length;
         continue;
       }
       const boxRect = box.getBoundingClientRect();
@@ -243,7 +273,14 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
         const r = range.getBoundingClientRect();
         const x = box.offsetLeft + (r.left - boxRect.left) / ratio;
         const width = r.width / ratio;
-        boxes[index] = { x, y: baseline, w: width, cx: x + width / 2, cy: baseline - fontPx * 0.36, lc: 0 };
+        boxes[index] = {
+          x,
+          y: baseline,
+          w: width,
+          cx: x + width / 2,
+          cy: baseline - fontPx * 0.36,
+          lc: 0,
+        };
         index += 1;
       }
     }
@@ -274,8 +311,8 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
       const box = boxes[i];
       for (const el of [glyphRefs.current[i], lineRefs.current[i]]) {
         if (!el || !box) continue;
-        el.setAttribute('x', box.x.toFixed(2));
-        el.setAttribute('y', `${box.y}`);
+        el.setAttribute("x", box.x.toFixed(2));
+        el.setAttribute("y", `${box.y}`);
         write(el);
       }
     }
@@ -290,9 +327,10 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     let alive = true;
     const ro = new ResizeObserver(() => sync());
     ro.observe(root);
-    if (document.fonts?.ready) document.fonts.ready.then(() => alive && sync()).catch(() => {});
+    if (document.fonts?.ready)
+      document.fonts.ready.then(() => alive && sync()).catch(() => {});
 
-    const motionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const motionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)");
     const off = offsetRef.current;
     let raf = 0;
     let last = 0;
@@ -318,7 +356,9 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
         const ease = 1 - Math.exp(-dt / 0.18);
         off.x += (off.tx + dx - off.x) * ease;
         off.y += (off.ty + dy - off.y) * ease;
-        off.zoom += ((hovering ? s.hoverZoom : 0) - off.zoom) * (1 - Math.exp(-dt / 0.35));
+        off.zoom +=
+          ((hovering ? s.hoverZoom : 0) - off.zoom) *
+          (1 - Math.exp(-dt / 0.35));
       }
 
       if (s.spotlight) {
@@ -370,7 +410,7 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     };
 
     const onEnter = (e: PointerEvent) => {
-      hovering = e.pointerType !== 'touch';
+      hovering = e.pointerType !== "touch";
       onMove(e);
       wake();
     };
@@ -388,9 +428,9 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     });
     io.observe(root);
 
-    root.addEventListener('pointermove', onMove);
-    root.addEventListener('pointerenter', onEnter);
-    root.addEventListener('pointerleave', onLeave);
+    root.addEventListener("pointermove", onMove);
+    root.addEventListener("pointerenter", onEnter);
+    root.addEventListener("pointerleave", onLeave);
     wake();
 
     return () => {
@@ -400,9 +440,9 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
       wakeRef.current = () => {};
       ro.disconnect();
       io.disconnect();
-      root.removeEventListener('pointermove', onMove);
-      root.removeEventListener('pointerenter', onEnter);
-      root.removeEventListener('pointerleave', onLeave);
+      root.removeEventListener("pointermove", onMove);
+      root.removeEventListener("pointerenter", onEnter);
+      root.removeEventListener("pointerleave", onLeave);
     };
   }, [place, sync]);
 
@@ -411,13 +451,27 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
   });
 
   useEffect(() => {
-    const video = mediaRef.current?.querySelector('video');
-    if (video && window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) video.pause();
+    const video = mediaRef.current?.querySelector("video");
+    if (
+      video &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
+    )
+      video.pause();
   }, [mediaType, src]);
 
   useIsomorphicLayoutEffect(() => {
     sync();
-  }, [sync, words, tag, align, weight, tracking, lineHeight, textScale, outline]);
+  }, [
+    sync,
+    words,
+    tag,
+    align,
+    weight,
+    tracking,
+    lineHeight,
+    textScale,
+    outline,
+  ]);
 
   useIsomorphicLayoutEffect(() => {
     const root = rootRef.current;
@@ -433,12 +487,12 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
 
     const clearLayer = () => {
       gsap.set(layer, { opacity: 1, scale: 1 });
-      layer.style.clipPath = '';
-      layer.style.filter = '';
+      layer.style.clipPath = "";
+      layer.style.filter = "";
     };
 
     const settle = () => {
-      states.forEach(st => {
+      states.forEach((st) => {
         st.x = 0;
         st.y = 0;
         st.s = 1;
@@ -449,31 +503,33 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
 
     const rest = () => {
       const size = em();
-      if (reveal === 'rise') {
-        states.forEach(st => {
+      if (reveal === "rise") {
+        states.forEach((st) => {
           st.y = size * 1.15;
         });
-      } else if (reveal === 'scale') {
-        states.forEach(st => {
+      } else if (reveal === "scale") {
+        states.forEach((st) => {
           st.y = size * 0.1;
           st.s = 0;
         });
-      } else if (reveal === 'blur') {
-        states.forEach(st => {
+      } else if (reveal === "blur") {
+        states.forEach((st) => {
           st.x = 0.22;
         });
         gsap.set(layer, { opacity: 0 });
         layer.style.filter = `blur(${(size * 0.3).toFixed(2)}px)`;
-      } else if (reveal === 'wipe') {
-        layer.style.clipPath = 'inset(0% 100% 0% 0%)';
-      } else if (reveal === 'fade') {
+      } else if (reveal === "wipe") {
+        layer.style.clipPath = "inset(0% 100% 0% 0%)";
+      } else if (reveal === "fade") {
         gsap.set(layer, { opacity: 0, scale: 1.08 });
       }
       renderGlyphs();
     };
 
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-    if (reveal === 'none' || reduce) {
+    const reduce = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    )?.matches;
+    if (reveal === "none" || reduce) {
       settle();
       return undefined;
     }
@@ -481,88 +537,115 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
     const play = () => {
       tweenRef.current?.kill();
       const size = em();
-      if (reveal === 'rise') {
+      if (reveal === "rise") {
         clearLayer();
         tweenRef.current = gsap.fromTo(
           states,
           { x: 0, y: size * 1.15, s: 1 },
-          { y: 0, duration, stagger: wordDelay, ease: 'power4.out', overwrite: 'auto', onUpdate: renderGlyphs }
+          {
+            y: 0,
+            duration,
+            stagger: wordDelay,
+            ease: "power4.out",
+            overwrite: "auto",
+            onUpdate: renderGlyphs,
+          },
         );
         renderGlyphs();
-      } else if (reveal === 'scale') {
+      } else if (reveal === "scale") {
         clearLayer();
         tweenRef.current = gsap.fromTo(
           states,
           { x: 0, y: size * 0.1, s: 0 },
-          { y: 0, s: 1, duration, stagger: letterDelay, ease: 'expo.out', overwrite: 'auto', onUpdate: renderGlyphs }
+          {
+            y: 0,
+            s: 1,
+            duration,
+            stagger: letterDelay,
+            ease: "expo.out",
+            overwrite: "auto",
+            onUpdate: renderGlyphs,
+          },
         );
         renderGlyphs();
-      } else if (reveal === 'blur') {
+      } else if (reveal === "blur") {
         const focus = { blur: size * 0.3, opacity: 0 };
         gsap.set(layer, { scale: 1, opacity: 0 });
-        layer.style.clipPath = '';
+        layer.style.clipPath = "";
         layer.style.filter = `blur(${focus.blur.toFixed(2)}px)`;
         const timeline = gsap.timeline({ onUpdate: renderGlyphs });
-        timeline.fromTo(states, { x: 0.22, y: 0, s: 1 }, { x: 0, duration: duration * 1.2, ease: 'expo.out' }, 0);
+        timeline.fromTo(
+          states,
+          { x: 0.22, y: 0, s: 1 },
+          { x: 0, duration: duration * 1.2, ease: "expo.out" },
+          0,
+        );
         timeline.to(
           focus,
           {
             blur: 0,
             opacity: 1,
             duration: duration * 1.2,
-            ease: 'power2.out',
+            ease: "power2.out",
             onUpdate: () => {
-              layer.style.filter = focus.blur > 0.05 ? `blur(${focus.blur.toFixed(2)}px)` : '';
+              layer.style.filter =
+                focus.blur > 0.05 ? `blur(${focus.blur.toFixed(2)}px)` : "";
               layer.style.opacity = focus.opacity.toFixed(3);
-            }
+            },
           },
-          0
+          0,
         );
         tweenRef.current = timeline;
         renderGlyphs();
-      } else if (reveal === 'wipe') {
+      } else if (reveal === "wipe") {
         settle();
-        layer.style.clipPath = 'inset(0% 100% 0% 0%)';
+        layer.style.clipPath = "inset(0% 100% 0% 0%)";
         const state = { p: 100 };
         tweenRef.current = gsap.to(state, {
           p: 0,
           duration,
-          ease: 'power3.inOut',
-          overwrite: 'auto',
+          ease: "power3.inOut",
+          overwrite: "auto",
           onUpdate: () => {
             layer.style.clipPath = `inset(0% ${state.p}% 0% 0%)`;
-          }
+          },
         });
       } else {
         settle();
         tweenRef.current = gsap.fromTo(
           layer,
           { opacity: 0, scale: 1.08 },
-          { opacity: 1, scale: 1, duration, ease: 'power3.out', overwrite: 'auto' }
+          {
+            opacity: 1,
+            scale: 1,
+            duration,
+            ease: "power3.out",
+            overwrite: "auto",
+          },
         );
       }
     };
 
-    if (trigger === 'hover') {
+    if (trigger === "hover") {
       settle();
-      root.addEventListener('pointerenter', play);
+      root.addEventListener("pointerenter", play);
       return () => {
-        root.removeEventListener('pointerenter', play);
+        root.removeEventListener("pointerenter", play);
         tweenRef.current?.kill();
       };
     }
 
-    if (trigger === 'view') {
+    if (trigger === "view") {
       settle();
       rest();
       const io = new IntersectionObserver(
-        entries => {
-          if (entries.some(e => e.isIntersecting)) {
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
             play();
             io.disconnect();
           }
         },
-        { threshold: 0.25 }
+        { threshold: 0.25 },
       );
       io.observe(root);
       return () => {
@@ -586,7 +669,7 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
         fontWeight: weight,
         letterSpacing: `${tracking}em`,
         lineHeight,
-        ...style
+        ...style,
       }}
       {...rest}
     >
@@ -610,7 +693,11 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
         ))}
       </span>
 
-      <svg className="masked-heading__defs" aria-hidden="true" focusable="false">
+      <svg
+        className="masked-heading__defs"
+        aria-hidden="true"
+        focusable="false"
+      >
         <defs>
           <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
             {glyphs.map((glyph, i) => (
@@ -634,12 +721,12 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
           style={
             {
               clipPath: `url(#${clipId})`,
-              ['--mh-spot-r' as string]: `${Math.max(1, spotlightRadius)}px`
+              ["--mh-spot-r" as string]: `${Math.max(1, spotlightRadius)}px`,
             } as CSSProperties
           }
         >
           <span ref={mediaRef} className="masked-heading__media">
-            {mediaType === 'video' ? (
+            {mediaType === "video" ? (
               <video
                 className="masked-heading__source"
                 src={src || undefined}
@@ -650,10 +737,20 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
                 playsInline
               />
             ) : (
-              <img className="masked-heading__source" src={src || undefined} alt="" draggable={false} />
+              <img
+                className="masked-heading__source"
+                src={src || undefined}
+                alt=""
+                draggable={false}
+              />
             )}
           </span>
-          {tint ? <span className="masked-heading__tint" style={{ background: tint }} /> : null}
+          {tint ? (
+            <span
+              className="masked-heading__tint"
+              style={{ background: tint }}
+            />
+          ) : null}
           {spotlight ? (
             <>
               <span
@@ -674,7 +771,10 @@ const MaskedHeading: React.FC<MaskedHeadingProps> = ({
           className="masked-heading__outline"
           aria-hidden="true"
           focusable="false"
-          style={{ stroke: outlineColor || 'currentColor', strokeWidth: Math.max(0, outlineWidth) }}
+          style={{
+            stroke: outlineColor || "currentColor",
+            strokeWidth: Math.max(0, outlineWidth),
+          }}
         >
           {glyphs.map((glyph, i) => (
             <text

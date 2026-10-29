@@ -24,59 +24,66 @@ export const getEvents = async (userId: string) => {
   const userEventIds: string[] = [];
 
   if (userEvents) {
-    userEvents.registeredEvents.sort((a,b)=>a.eventDate.getTime() - b.eventDate.getTime()).forEach((e) => {
-      userEventIds.push(e.id);
-      finalEvents.push({
-        ...e,
-        eventDate: e.eventDate.toDateString(),
-        registrationsOpen: e.registrationsOpen,
-        registered: true,
+    userEvents.registeredEvents
+      .sort((a, b) => a.eventDate.getTime() - b.eventDate.getTime())
+      .forEach((e) => {
+        userEventIds.push(e.id);
+        finalEvents.push({
+          ...e,
+          eventDate: e.eventDate.toDateString(),
+          registrationsOpen: e.registrationsOpen,
+          registered: true,
+        });
       });
-    });
-    allEvents.sort((a,b)=>a.eventDate.getTime() - b.eventDate.getTime()).forEach(e => {
-        if(!(userEventIds.includes(e.id))) finalEvents.push({
-        ...e,
-        eventDate: e.eventDate.toDateString(),
-        registrationsOpen: e.registrationsOpen,
-        registered: false,
+    allEvents
+      .sort((a, b) => a.eventDate.getTime() - b.eventDate.getTime())
+      .forEach((e) => {
+        if (!userEventIds.includes(e.id))
+          finalEvents.push({
+            ...e,
+            eventDate: e.eventDate.toDateString(),
+            registrationsOpen: e.registrationsOpen,
+            registered: false,
+          });
       });
-    })
   } else {
-    return allEvents.sort((a,b)=>a.eventDate.getTime() - b.eventDate.getTime()).map(e => ({
+    return allEvents
+      .sort((a, b) => a.eventDate.getTime() - b.eventDate.getTime())
+      .map((e) => ({
         ...e,
         eventDate: e.eventDate.toDateString(),
         registrationsOpen: e.registrationsOpen,
         registered: false,
       }));
-    }
+  }
   return finalEvents;
 };
 
 export const registerForEvent = async (eventId: string, userId: string) => {
   const event = await prisma.event.findUnique({
     where: {
-      id: eventId
-    }
+      id: eventId,
+    },
   });
 
   if (!event || !event.registrationsOpen) {
     return false;
   }
 
-  try{
+  try {
     await prisma.user.update({
       where: {
-        id: userId
+        id: userId,
       },
       data: {
         registeredEvents: {
-          connect: {id: eventId}
-        }
-      }
+          connect: { id: eventId },
+        },
+      },
     });
     return true;
-  }catch(err){
+  } catch (err) {
     console.error(err);
     return false;
   }
-}
+};

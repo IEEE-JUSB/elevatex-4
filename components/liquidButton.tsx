@@ -1,6 +1,6 @@
-import type { ButtonHTMLAttributes } from "react"
+import type { ButtonHTMLAttributes } from "react";
 
-type LiquidButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+type LiquidButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 function LiquidButton({
   children,
@@ -58,8 +58,8 @@ function LiquidButton({
         }
       `}</style>
     </>
-  )
+  );
 }
 
-export { LiquidButton }
-export type { LiquidButtonProps }
+export { LiquidButton };
+export type { LiquidButtonProps };

@@ -25,10 +25,9 @@ const Card: React.FC<CardProps> = ({ image, name, url, designation }) => (
       target="_blank"
       className="text-white text-lg lg:text-xl drop-shadow-2xl bg-black/10 hover:bg-black/30 transition-colors duration-300 w-full text-center py-3 font-syne font-bold absolute bottom-0 left-1/2 -translate-x-1/2"
     >
-      {name}<br/>
-      <span className="text-base font-normal">
-        {designation}
-      </span>
+      {name}
+      <br />
+      <span className="text-base font-normal">{designation}</span>
     </Link>
   </div>
 );
