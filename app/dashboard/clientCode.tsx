@@ -129,98 +129,266 @@ function ClientCode({ user }: { user: UserType }) {
   //       </div>
   //     );
 
+  const openEventsCount =
+    upcomingEvents?.filter((e) => e.registrationsOpen).length ?? 0;
+
   return (
-    <div className="relative font-syne min-h-screen bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] flex flex-col items-center gap-y-4 p-12">
-      <Link
-        href={"/"}
-        className="cursor-pointer hover:scale-105 transition duration-300"
-      >
-        <Image
-          height={200}
-          width={200}
-          src="/elevatex-logo.png"
-          alt="ElevateX Logo"
-        />
-      </Link>
-      <h1 className="text-4xl lg:text-6xl font-bold">Dashboard</h1>
-      <h2 className="font-medium text-lg sm:text-2xl my-4">
-        Welcome, {user.name}!
-      </h2>
-      <h3 className="sm:text-lg">
-        Check out our{" "}
-        <Link href={"/#schedule"} className="underline underline-offset-2">
-          Schedule
-        </Link>{" "}
-        and{" "}
-        <Link href={"/#speakers"} className="underline underline-offset-2">
-          Speakers
-        </Link>{" "}
-        to learn more!
-      </h3>
-      <div className="w-full grid place-items-center sm:grid-cols-2 sm:p-8 gap-12">
-        <div className="flex flex-col items-center gap-y-6 bg-white/30 p-6 rounded-xl w-full sm:w-3/4">
-          <h3 className="text-2xl text-blue-800">Registered Events</h3>
-          {registeredEvents && registeredEvents.length > 0 ? (
-            registeredEvents.map((e) => (
-              <div
-                key={e.id}
-                className="w-full grid grid-cols-2 place-items-center gap-x-3"
-              >
-                {e.eventUrl ? (
-                  <Link
-                    href={e.eventUrl}
-                    className="underline underline-offset-2"
-                  >
-                    {e.name}
-                  </Link>
-                ) : (
-                  <p>{e.name}</p>
-                )}
-                <p>{e.eventDate}</p>
-              </div>
-            ))
-          ) : (
-            <div>{eventsLoading ? "Loading..." : "No registered events."}</div>
-          )}
-          <p className="text-sm text-blue-900">
-            Before each event, the event link will be sent to your registered
-            email!
+    <div className="relative font-syne min-h-screen bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] flex flex-col items-center px-4 sm:px-8 lg:px-12 py-8 gap-y-8 text-slate-900">
+      {/* Top Navbar */}
+      <header className="w-full max-w-6xl bg-white/30 backdrop-blur-md border border-white/40 shadow-sm rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+        <Link
+          href={"/"}
+          className="cursor-pointer hover:scale-105 transition duration-300 flex items-center"
+        >
+          <Image
+            height={140}
+            width={140}
+            src="/elevatex-logo.png"
+            alt="ElevateX Logo"
+            className="h-10 w-auto object-contain"
+          />
+        </Link>
+
+        <nav className="flex flex-wrap items-center gap-3 sm:gap-6">
+          <Link
+            href={"/#schedule"}
+            className="text-sm sm:text-base font-medium text-blue-900 hover:text-blue-700 underline underline-offset-4 transition-colors"
+          >
+            Schedule
+          </Link>
+          <Link
+            href={"/#speakers"}
+            className="text-sm sm:text-base font-medium text-blue-900 hover:text-blue-700 underline underline-offset-4 transition-colors"
+          >
+            Speakers
+          </Link>
+          <button
+            className="text-sm sm:text-base font-medium text-white bg-red-600 hover:bg-red-700 active:scale-95 px-4 py-2 rounded-xl cursor-pointer shadow-sm transition-all duration-200 flex items-center gap-2"
+            onClick={() => handleSignOut()}
+          >
+            <svg
+               xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              />
+            </svg>
+            Logout
+          </button>
+        </nav>
+      </header>
+
+      {/* Hero Welcome Banner */}
+      <section className="w-full max-w-6xl bg-white/30 backdrop-blur-md border border-white/40 shadow-sm rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-2">
+          <h1 className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight">
+            Dashboard
+          </h1>
+          <h2 className="font-medium text-lg sm:text-2xl text-blue-950">
+            Welcome, <span className="font-bold text-blue-800">{user.name}</span>!
+          </h2>
+          <p className="text-sm sm:text-base text-slate-800 pt-1">
+            Check out our{" "}
+            <Link
+              href={"/#schedule"}
+              className="font-semibold text-blue-800 hover:text-blue-600 underline underline-offset-4 transition-colors"
+            >
+              Schedule
+            </Link>{" "}
+            and{" "}
+            <Link
+              href={"/#speakers"}
+              className="font-semibold text-blue-800 hover:text-blue-600 underline underline-offset-4 transition-colors"
+            >
+              Speakers
+            </Link>{" "}
+            to learn more!
           </p>
         </div>
-        <div className="flex flex-col items-center gap-y-6 bg-white/30 p-6 rounded-xl w-full sm:w-3/4">
-          <h3 className="text-2xl text-blue-800">Upcoming Events</h3>
-          {upcomingEvents && upcomingEvents.length > 0 ? (
-            upcomingEvents.map((e) => (
-              <div
-                key={e.id}
-                className="w-full grid grid-cols-3 place-items-center gap-x-3"
-              >
-                <p>{e.name}</p>
-                <p>{e.eventDate}</p>
-                <button
-                  className="bg-purple-400
-                  w-full
-                  py-1 px-2 rounded-md cursor-pointer hover:bg-blue-500 transition-colors duration-300"
-                  onClick={() => handleRegister(e.id, user.id)}
-                  disabled={registering || e.registrationsOpen === false}
-                >
-                  {e.registrationsOpen ? "Register" : "Registration Closed"}
-                </button>
-              </div>
-            ))
-          ) : (
-            <div>
-              {eventsLoading ? "Loading..." : "No upcoming events to register."}
-            </div>
-          )}
+
+        {/* Summary Stat Pills */}
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-4 w-full md:w-auto">
+          <div className="flex-1 sm:flex-initial bg-white/45 border border-white/60 rounded-xl px-5 py-4 min-w-[140px] shadow-sm">
+            <p className="text-xs uppercase tracking-wider text-blue-900/80 font-semibold">
+              Registered
+            </p>
+            <p className="text-3xl font-bold text-blue-800 mt-1">
+              {registeredEvents ? registeredEvents.length : 0}
+            </p>
+          </div>
+          <div className="flex-1 sm:flex-initial bg-purple-400/30 border border-purple-300/60 rounded-xl px-5 py-4 min-w-[140px] shadow-sm">
+            <p className="text-xs uppercase tracking-wider text-blue-900/80 font-semibold">
+              Open to Join
+            </p>
+            <p className="text-3xl font-bold text-blue-900 mt-1">
+              {openEventsCount}
+            </p>
+          </div>
         </div>
-      </div>
-      <button
-        className="text-lg text-white bg-red-600 px-3 py-1 rounded-lg cursor-pointer"
-        onClick={() => handleSignOut()}
-      >
-        Logout
-      </button>
+      </section>
+
+      {/* Events Two-Column Section */}
+      <main className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        {/* Registered Events Card */}
+        <div className="flex flex-col justify-between bg-white/30 backdrop-blur-md border border-white/40 p-6 sm:p-8 rounded-2xl shadow-sm w-full gap-y-6">
+          <div className="space-y-6">
+            <div className="flex items-center justify-between border-b border-blue-900/15 pb-4">
+              <div className="flex items-center gap-3">
+                
+                <h3 className="text-2xl font-bold text-blue-800">
+                  Registered Events
+                </h3>
+              </div>
+              <span className="bg-blue-800/15 text-blue-900 text-sm font-bold px-3 py-1 rounded-full">
+                {registeredEvents ? registeredEvents.length : 0}
+              </span>
+            </div>
+
+            {registeredEvents && registeredEvents.length > 0 ? (
+              <div className="flex flex-col gap-y-3.5">
+                {registeredEvents.map((e) => (
+                  <div
+                    key={e.id}
+                    className="w-full bg-white/45 hover:bg-white/60 transition-all duration-200 border border-white/60 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm"
+                  >
+                    <div className="space-y-1">
+                      {e.eventUrl ? (
+                        <Link
+                          href={e.eventUrl}
+                          className="font-semibold text-blue-900 hover:text-blue-700 underline underline-offset-2 inline-flex items-center gap-1.5"
+                        >
+                          <span>{e.name}</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </Link>
+                      ) : (
+                        <p className="font-semibold text-slate-900">{e.name}</p>
+                      )}
+                      <div className="flex items-center gap-1.5 text-sm text-blue-900/80">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                        <span>{e.eventDate}</span>
+                      </div>
+                    </div>
+
+                    <span className="self-start sm:self-center inline-flex items-center gap-1.5 text-xs font-semibold text-blue-800 bg-blue-800/10 border border-blue-800/20 px-3 py-1.5 rounded-full whitespace-nowrap">
+                      <span className="h-2 w-2 rounded-full bg-blue-700" />
+                      Registered
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="border border-dashed border-blue-900/25 bg-white/20 rounded-xl p-8 text-center text-blue-950/80 font-medium">
+                {eventsLoading ? "Loading..." : "No registered events."}
+              </div>
+            )}
+          </div>
+
+          <div className="w-full p-3">
+            Before each event, the event link will be sent to your registered
+            email!
+          </div>
+        </div>
+
+        {/* Upcoming Events Card */}
+        <div className="flex flex-col justify-between bg-white/30 backdrop-blur-md border border-white/40 p-6 sm:p-8 rounded-2xl shadow-sm w-full gap-y-6">
+          <div className="space-y-6">
+            <div className="flex items-center justify-between border-b border-blue-900/15 pb-4">
+              <div className="flex items-center gap-3">
+                
+                <h3 className="text-2xl font-bold text-blue-800">
+                  Upcoming Events
+                </h3>
+              </div>
+              <span className="bg-purple-500/20 text-blue-900 text-sm font-bold px-3 py-1 rounded-full">
+                {upcomingEvents ? upcomingEvents.length : 0}
+              </span>
+            </div>
+
+            {upcomingEvents && upcomingEvents.length > 0 ? (
+              <div className="flex flex-col gap-y-3.5">
+                {upcomingEvents.map((e) => (
+                  <div
+                    key={e.id}
+                    className="w-full bg-white/45 hover:bg-white/60 transition-all duration-200 border border-white/60 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm"
+                  >
+                    <div className="space-y-1">
+                      <p className="font-semibold text-slate-900">{e.name}</p>
+                      <div className="flex items-center gap-1.5 text-sm text-blue-900/80">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                        <span>{e.eventDate}</span>
+                      </div>
+                    </div>
+
+                    <button
+                      className={`sm:w-auto w-full py-2 px-5 rounded-xl font-semibold text-sm transition-all duration-300 whitespace-nowrap ${
+                        e.registrationsOpen
+                          ? "bg-purple-400 hover:bg-blue-500 text-slate-950 hover:text-white cursor-pointer shadow-sm active:scale-95"
+                          : "bg-white/40 text-slate-600 border border-slate-400/30 cursor-not-allowed"
+                      }`}
+                      onClick={() => handleRegister(e.id, user.id)}
+                      disabled={registering || e.registrationsOpen === false}
+                    >
+                      {e.registrationsOpen ? "Register" : "Registration Closed"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="border border-dashed border-blue-900/25 bg-white/20 rounded-xl p-8 text-center text-blue-950/80 font-medium">
+                {eventsLoading
+                  ? "Loading..."
+                  : "No upcoming events to register."}
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
