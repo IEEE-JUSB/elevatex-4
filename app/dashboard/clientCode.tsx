@@ -47,48 +47,8 @@ const navItems: string[] = [
 function ClientCode({ user }: { user: UserType }) {
   //   const { data, isPending } = useSession();
   const [registeredEvents, setRegisteredEvents] = useState<EventType[]>([
-    // {
-    //   id: "sample-registered-1",
-    //   name: "Product Design Workshop",
-    //   eventDate: "Fri Oct 30 2026",
-    //   registrationsOpen: true,
-    //   registered: true,
-    //   eventUrl: "https://example.com/product-design-workshop",
-    // },
-    // {
-    //   id: "sample-registered-2",
-    //   name: "Building with Generative AI",
-    //   eventDate: "Sun Nov 01 2026",
-    //   registrationsOpen: true,
-    //   registered: true,
-    //   eventUrl: null,
-    // },
   ]);
   const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([
-    // {
-    //   id: "sample-upcoming-1",
-    //   name: "Career Planning for Engineers",
-    //   eventDate: "Mon Nov 02 2026",
-    //   registrationsOpen: true,
-    //   registered: false,
-    //   eventUrl: null,
-    // },
-    // {
-    //   id: "sample-upcoming-2",
-    //   name: "Open Source: Getting Started",
-    //   eventDate: "Sun Nov 08 2026",
-    //   registrationsOpen: true,
-    //   registered: false,
-    //   eventUrl: null,
-    // },
-    // {
-    //   id: "sample-upcoming-3",
-    //   name: "Machine Learning in Practice",
-    //   eventDate: "Sun Nov 15 2026",
-    //   registrationsOpen: false,
-    //   registered: false,
-    //   eventUrl: null,
-    // },
   ]);
   //deletelater sample events
   const [eventsLoading, setEventsLoading] = useState<boolean>(true);
@@ -146,18 +106,6 @@ function ClientCode({ user }: { user: UserType }) {
       <header className="w-full max-w-6xl
        border-b border-blue-900/15
        px-0 pb-6 flex flex-wrap items-center justify-between gap-4">
-        {/* <Link
-          href={"/"}
-          className="cursor-pointer hover:scale-105 transition duration-300 flex items-center"
-        >
-          <Image
-            height={140}
-            width={140}
-            src="/elevatex-logo.png"
-            alt="ElevateX Logo"
-            className="h-10 w-auto object-contain"
-          />
-        </Link> */}
         <Link href={"/"} className="font-sans">
             {" "}
             <span className="text-[#100E26] text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
@@ -184,38 +132,7 @@ function ClientCode({ user }: { user: UserType }) {
           </Link>
 
         <nav className="lg:flex md:flex flex-wrap items-center gap-3 sm:gap-6 hidden">
-          {/* <Link
-            href={"/#schedule"}
-            className="text-sm sm:text-base font-medium text-blue-900 hover:text-blue-700 underline underline-offset-4 transition-colors"
-          >
-            Schedule
-          </Link>
-          <Link
-            href={"/#speakers"}
-            className="text-sm sm:text-base font-medium text-blue-900 hover:text-blue-700 underline underline-offset-4 transition-colors"
-          >
-            Speakers
-          </Link>
-          <button
-            className="text-sm sm:text-base font-medium text-white bg-red-600 hover:bg-red-700 active:scale-95 px-4 py-2 rounded-xl cursor-pointer shadow-sm transition-all duration-200 flex items-center gap-2"
-            onClick={() => handleSignOut()}
-          >
-            <svg
-               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            Logout
-          </button> */}
+
           {navItems.map((item: string) => (
               <a
                 key={item}
