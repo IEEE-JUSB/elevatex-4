@@ -48,16 +48,16 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="sm:min-h-screen flex flex-col md:flex-row">
-      <div className="w-full bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] p-12 pt-0 flex flex-col items-center justify-around">
+    <div className="min-h-screen flex flex-col items-center justify-center  bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] md:flex-row">
+      <div className="w-full  p-12 pt-0 flex flex-col items-center justify-center">
         <Link href={"/"}>
-          <Image
+          {/* <Image
             src={"/elevatex-logo.png"}
             alt="ElevateX 4.0 Logo"
             height={200}
             width={400}
             className="aspect-video object-contain"
-          />
+          /> */}
         </Link>
         <div className="max-w-md mx-auto w-full font-syne">
           <h1 className="text-5xl font-bold text-gray-900 mb-2">

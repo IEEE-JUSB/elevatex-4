@@ -21,7 +21,6 @@ function LiquidButton({
         >
           <span className="absolute top-0 left-1/2 size-[145%] -translate-x-1/2 -translate-y-1/2 [animation:liquid-button-wave_7s_linear_infinite] rounded-[43%] bg-slate-950/95 motion-reduce:animate-none" />
           <span className="absolute top-0 left-1/2 size-[135%] -translate-x-1/2 -translate-y-1/2 [animation:liquid-button-wave_5s_linear_infinite_reverse] rounded-[47%] bg-slate-950/45 motion-reduce:animate-none" />
-
           {/* <span
             className="absolute bottom-4 left-[22%] size-1.5 [animation:liquid-button-bubble_1.8s_ease-in_infinite] rounded-full bg-white/70 opacity-0 group-hover/liquid:opacity-100 group-disabled/liquid:hidden motion-reduce:hidden"
             style={{ animationDelay: "120ms" }}
@@ -39,10 +38,10 @@ function LiquidButton({
         <span className="relative z-10 inline-flex items-center gap-2">
           {children}
         </span>
-        <span
+        {/* <span
           aria-hidden="true"
           className="absolute inset-x-5 top-0 z-20 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"
-        />
+        /> */}
       </button>
 
       <style>{`

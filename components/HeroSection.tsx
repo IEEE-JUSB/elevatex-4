@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { useState, FC } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 //import { CarouselPlugin } from './Carousel';
-import GhostFibers from "./GhostFibers";
 import RotatingText from "./RotatingText";
 import Carousel from "./Carousel";
 import MaskedHeading from "./MaskedHeading";
@@ -64,7 +63,8 @@ const HeroSection: FC = () => {
           </Link> */}
           <Link href={"/"}>
             {" "}
-            <span className="text-white text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
+            <span className="text-white text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight
+            ">
               Elevate
             </span>
             <TextGradient
@@ -78,11 +78,11 @@ const HeroSection: FC = () => {
                 "#FFFFFF", // Dark near-black background / deep shadow tone
               ]}
               duration={15}
-              className="text-2xl md:text-3xl lg:text-5xl font-stretch-110% tracking-tight scale-[105%]"
+              className="text-3xl md:text-4xl lg:text-5xl font-syne tracking-tight scale-[150%] "
             >
               X
             </TextGradient>{" "}
-            <span className="text-purple-200 text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
+            <span className="text-purple-200 text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
               &nbsp;&nbsp;4.0
             </span>
           </Link>
@@ -149,7 +149,7 @@ const HeroSection: FC = () => {
             <div className="flex gap-8 justify-center text-center">
               <Link
                 href={"/register"}
-                className="mt-10 px-8 py-3 bg-black text-white font-semibold rounded-xl shadow-lg hover:bg-gray-900 transition duration-300 ease-in-out transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50 text-lg md:text-xl"
+                className="mt-10 px-8 py-3 bg-black text-white font-semibold rounded-xl shadow-lg hover:bg-gray-900 transition duration-300 ease-in-out transform hover:scale-[1.02] active:scale-[0.98] text-lg md:text-xl"
               >
                 Register Now!
               </Link>
