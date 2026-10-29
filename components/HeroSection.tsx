@@ -78,12 +78,12 @@ const HeroSection: FC = () => {
                 "#FFFFFF", // Dark near-black background / deep shadow tone
               ]}
               duration={15}
-              className="text-3xl md:text-4xl lg:text-6xl tracking-tight"
+              className="text-2xl md:text-3xl lg:text-5xl font-stretch-110% tracking-tight scale-[105%]"
             >
               X
             </TextGradient>{" "}
-            <span className="text-purple-200 ext-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
-              &nbsp;4.0
+            <span className="text-purple-200 text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
+              &nbsp;&nbsp;4.0
             </span>
           </Link>
 
