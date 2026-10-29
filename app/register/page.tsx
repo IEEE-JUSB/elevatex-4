@@ -24,23 +24,23 @@ export default function RegisterPage() {
   const handleSendOtp = () => {
     setStatus("Sending OTP...");
     setOtpSent(true);
-    emailOtp.sendVerificationOtp({
-      email: formData.email,
-      type: "email-verification"
-    })
-    .then(()=>{
-      setStatus("Email sent with OTP.");
-    })
-  }
+    emailOtp
+      .sendVerificationOtp({
+        email: formData.email,
+        type: "email-verification",
+      })
+      .then(() => {
+        setStatus("Email sent with OTP.");
+      });
+  };
 
   const handleSubmitOtp = () => {
     setStatus("Loading...");
-    handleSignup(otp, formData)
-    .then(res => {
+    handleSignup(otp, formData).then((res) => {
       setStatus(res.message);
-      if(res.ok) redirect("/dashboard")
-    })
-  }
+      if (res.ok) redirect("/dashboard");
+    });
+  };
 
   const handleSubmit = () => {
     const formValidity = validateForm(formData);
@@ -62,7 +62,7 @@ export default function RegisterPage() {
     <div className="sm:min-h-screen flex flex-col sm:flex-row">
       <dialog
         ref={dialogRef}
-        className="backdrop:bg-gray-800/80 rounded-xl bg-blue-400 font-syne p-3 outline-none top-1/2 left-1/2 -translate-1/2 w-4/5 sm:w-1/2"
+        className="backdrop:bg-gray-800/80 rounded-xl bg-violet-400 font-syne p-3 outline-none top-1/2 left-1/2 -translate-1/2 w-4/5 sm:w-1/2"
       >
         <div className="flex flex-col items-center gap-y-3">
           <h2 className="text-2xl xl:text-3xl font-semibold">
@@ -72,8 +72,11 @@ export default function RegisterPage() {
             If you&apos;re seeing this, your email isn&apos;t verified.
           </p>
           <p>Email Address: {formData.email}</p>
-          <button className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
-          onClick={()=>handleSendOtp()} disabled={otpSent}>
+          <button
+            className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
+            onClick={() => handleSendOtp()}
+            disabled={otpSent}
+          >
             Send OTP
           </button>
           <input
@@ -83,14 +86,18 @@ export default function RegisterPage() {
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
           />
-          <button className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
-          onClick={()=>handleSubmitOtp()} disabled={status === "Loading..."}>
+          <button
+            className="bg-white text-black px-2 py-1 rounded-md cursor-pointer hover:bg-gray-200 transition-colors duration-200"
+            onClick={() => handleSubmitOtp()}
+            disabled={status === "Loading..."}
+          >
             Submit OTP
           </button>
           <p>{status}</p>
         </div>
       </dialog>
-      <div className="w-full bg-gradient-to-br from-blue-300 to-blue-400 p-12 flex flex-col justify-center overflow-y-auto font-syne">
+
+      <div className="w-full bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] p-12 flex flex-col justify-center overflow-y-auto font-syne">
         <div className="max-w-md mx-auto w-full py-8">
           <h1 className="text-5xl font-bold text-gray-900 mb-2">
             Step into the
@@ -111,7 +118,7 @@ export default function RegisterPage() {
                 value={formData.name}
                 onChange={(e) => handleChange("name", e.target.value)}
                 placeholder="John Doe"
-                className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
               />
             </div>
 
@@ -125,7 +132,7 @@ export default function RegisterPage() {
                 value={formData.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 placeholder="johndoe@email.com"
-                className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
               />
             </div>
 
@@ -139,7 +146,7 @@ export default function RegisterPage() {
                 value={formData.password}
                 onChange={(e) => handleChange("password", e.target.value)}
                 placeholder="Enter password"
-                className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
               />
             </div>
 
@@ -153,7 +160,7 @@ export default function RegisterPage() {
                 value={formData.college}
                 onChange={(e) => handleChange("college", e.target.value)}
                 placeholder="Your College Name"
-                className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
               />
             </div>
 
@@ -168,7 +175,7 @@ export default function RegisterPage() {
                   value={formData.dept}
                   onChange={(e) => handleChange("dept", e.target.value)}
                   placeholder="CSE"
-                  className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                  className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
                 />
               </div>
               <div className="flex-1">
@@ -180,7 +187,7 @@ export default function RegisterPage() {
                   value={formData.year}
                   onChange={(e) => handleChange("year", e.target.value)}
                   placeholder="2nd"
-                  className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                  className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
                 />
               </div>
             </div>
@@ -195,7 +202,7 @@ export default function RegisterPage() {
                 value={formData.phone}
                 onChange={(e) => handleChange("phone", e.target.value)}
                 placeholder="9876543210"
-                className="w-full px-4 py-3 rounded-full bg-blue-200 bg-opacity-50 border-2 border-blue-300 focus:outline-none focus:border-indigo-500 text-gray-800 placeholder-gray-600"
+                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
                 required
               />
             </div>
@@ -204,7 +211,7 @@ export default function RegisterPage() {
             <div className="pt-4">
               <button
                 onClick={handleSubmit}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 cursor-pointer"
+                className="w-full bg-purple-600 hover:bg-purple-800 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 cursor-pointer"
                 disabled={status === "Loading..."}
               >
                 Register

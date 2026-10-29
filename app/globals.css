@@ -133,3 +133,6 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}

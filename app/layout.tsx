@@ -31,7 +31,8 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: "ElevateX 4.0",
-  description: "ElevateX is an all-in-one mentoring session by IEEE JUSB. Be it research or industry, be it competitive coding, electronics or soft skill development, we have tracks tailor-made for your needs, complete with doubt-clearing, quick contests, real-world problems and webinars by field experts.",
+  description:
+    "ElevateX is an all-in-one mentoring session by IEEE JUSB. Be it research or industry, be it competitive coding, electronics or soft skill development, we have tracks tailor-made for your needs, complete with doubt-clearing, quick contests, real-world problems and webinars by field experts.",
 };
 
 export default function RootLayout({
@@ -46,7 +47,7 @@ export default function RootLayout({
       >
         {children}
         <ElevatexFooter />
-      <Toaster position="top-right" />
+        <Toaster position="top-right" />
       </body>
     </html>
   );
