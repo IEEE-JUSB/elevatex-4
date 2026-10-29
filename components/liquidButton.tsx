@@ -1,6 +1,6 @@
-import type { ButtonHTMLAttributes } from "react"
+import type { ButtonHTMLAttributes } from "react";
 
-type LiquidButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+type LiquidButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 function LiquidButton({
   children,
@@ -11,7 +11,7 @@ function LiquidButton({
   return (
     <>
       <button
-        className={`group/liquid relative isolate inline-flex h-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-black bg-slate-950 px-6 text-sm font-semibold whitespace-nowrap text-white shadow-[0_12px_32px_-14px_rgba(168,85,247,0.8)] transition-[transform,box-shadow,border-color] duration-300 outline-none select-none hover:border-purple-600 hover:shadow-[0_16px_40px_-12px_rgba(168,85,247,0.95)] focus-visible:border-cyan-200 focus-visible:ring-3 focus-visible:ring-cyan-300/35 active:translate-y-px active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45 disabled:shadow-none ${className}`}
+        className={`group/liquid relative isolate inline-flex h-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-black bg-slate-950 px-3 md:px-6 lg:px-6 text-sm font-semibold whitespace-nowrap text-white shadow-[0_12px_32px_-14px_rgba(168,85,247,0.8)] transition-[transform,box-shadow,border-color] duration-300 outline-none select-none hover:border-purple-600 hover:shadow-[0_16px_40px_-12px_rgba(168,85,247,0.95)] focus-visible:border-cyan-200 focus-visible:ring-3 focus-visible:ring-cyan-300/35 active:translate-y-px active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45 disabled:shadow-none ${className}`}
         type={type}
         {...props}
       >
@@ -57,8 +57,8 @@ function LiquidButton({
         }
       `}</style>
     </>
-  )
+  );
 }
 
-export { LiquidButton }
-export type { LiquidButtonProps }
+export { LiquidButton };
+export type { LiquidButtonProps };

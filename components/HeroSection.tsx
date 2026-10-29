@@ -63,8 +63,10 @@ const HeroSection: FC = () => {
           </Link> */}
           <Link href={"/"}>
             {" "}
-            <span className="text-white text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight
-            ">
+            <span
+              className="text-white text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight
+            "
+            >
               Elevate
             </span>
             <TextGradient
@@ -78,11 +80,11 @@ const HeroSection: FC = () => {
                 "#FFFFFF", // Dark near-black background / deep shadow tone
               ]}
               duration={15}
-              className="text-3xl md:text-4xl lg:text-5xl font-syne tracking-tight scale-[150%] "
+              className="text-2xl md:text-3xl lg:text-5xl font-syne tracking-tight scale-[150%] "
             >
               X
             </TextGradient>{" "}
-            <span className="text-purple-200 text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+            <span className="text-purple-200 text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
               &nbsp;&nbsp;4.0
             </span>
           </Link>
@@ -160,8 +162,8 @@ const HeroSection: FC = () => {
           <div
             style={{ height: "600px", position: "relative" }}
             className="flex gap-8 justify-center
-            items-center
-            mt-20 lg:mt-0 md:mt-0 sm:mt-10
+            items-start
+            lg:mt-0 mt-10 
             "
           >
             <Carousel

@@ -49,7 +49,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center  bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] md:flex-row">
-      <div className="w-full  p-12 pt-0 flex flex-col items-center justify-center">
+      <div className="w-full p-12 flex flex-col items-center justify-center">
         <Link href={"/"}>
           {/* <Image
             src={"/elevatex-logo.png"}

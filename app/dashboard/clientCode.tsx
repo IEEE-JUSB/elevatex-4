@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import Image from "next/image";
 import TextGradient from "@/components/waveText21Dev";
+import { LogOut } from "lucide-react";
 
 const handleSignOut = () => {
   signOut({
@@ -37,19 +38,12 @@ interface UserType {
   phone: string;
 }
 
-const navItems: string[] = [
-    "About",
-    "Contact",
-    "Speakers",
-    "Schedule",
-  ];
+const navItems: string[] = ["About", "Contact", "Speakers", "Schedule"];
 
 function ClientCode({ user }: { user: UserType }) {
   //   const { data, isPending } = useSession();
-  const [registeredEvents, setRegisteredEvents] = useState<EventType[]>([
-  ]);
-  const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([
-  ]);
+  const [registeredEvents, setRegisteredEvents] = useState<EventType[]>([]);
+  const [upcomingEvents, setUpcomingEvents] = useState<EventType[]>([]);
   //deletelater sample events
   const [eventsLoading, setEventsLoading] = useState<boolean>(true);
   const [registering, setRegistering] = useState<boolean>(false);
@@ -103,80 +97,71 @@ function ClientCode({ user }: { user: UserType }) {
   return (
     <div className="relative font-syne min-h-screen bg-gradient-to-br from-[#B496E6]/50 to-[#8A6AD0] flex flex-col items-center px-4 sm:px-8 lg:px-12 py-8 gap-y-0 text-slate-900">
       {/* Top Navbar */}
-      <header className="w-full max-w-6xl
+      <header
+        className="w-full max-w-6xl
        border-b border-blue-900/15
-       px-0 pb-6 flex flex-wrap items-center justify-between gap-4">
+       px-0 pb-6 flex flex-wrap items-center justify-between gap-4"
+      >
         <Link href={"/"} className="font-sans">
-            {" "}
-            <span className="text-[#100E26] text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
-              Elevate
-            </span>
-            <TextGradient
-              as="h1"
-              // colors={["#ffffff", "#B496E6", "#7A62C6", "#6236A8", "#ffffff"]}
-              colors={[
-                "#4411C6", // Bright highlight / white at the top of the letters
-                "#ffffff", // Muted metallic lavender-silver midtone
-                "#4411C6", // Deep electric blue-purple base
-                "#8E4CE3", // Vibrant mid-violet / purple sheen
-                "#000000", // Dark near-black background / deep shadow tone
-              ]}
-              duration={15}
-              className="text-3xl md:text-4xl lg:text-5xl font-stretch-110% tracking-tight scale-[150%]"
-            >
-              X
-            </TextGradient>{" "}
-            <span className="text-[#7A62C6] text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
-              &nbsp;&nbsp;4.0
-            </span>
-          </Link>
+          {" "}
+          <span className="text-[#100E26] text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
+            Elevate
+          </span>
+          <TextGradient
+            as="h1"
+            // colors={["#ffffff", "#B496E6", "#7A62C6", "#6236A8", "#ffffff"]}
+            colors={[
+              "#ffffff", // Bright highlight / white at the top of the letters
+              "#ffffff", // Muted metallic lavender-silver midtone
+              "#ffffff", // Deep electric blue-purple base
+              "#8E4CE3", // Vibrant mid-violet / purple sheen
+              "#4411C6", // Dark near-black background / deep shadow tone
+            ]}
+            duration={15}
+            className="text-2xl md:text-3xl lg:text-5xl font-stretch-110% tracking-tight font-semibold scale-[120%]"
+          >
+            X
+          </TextGradient>{" "}
+          <span className="text-[#7A62C6] text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
+            &nbsp;&nbsp;4.0
+          </span>
+        </Link>
 
         <nav className="lg:flex md:flex flex-wrap items-center gap-3 sm:gap-6 hidden">
-
           {navItems.map((item: string) => (
-              <a
-                key={item}
-                href={`/#${item.toLowerCase()}`}
-                // onClick={() => handleNavClick(item)}
-                className="text-[#4411C6] font-bold hover:text-[#191433] transition duration-150 ease-in-out py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[2px] after:bg-[#191433] after:transition-all after:duration-300 hover:after:w-full hover:after:left-0"
-              >
-                {item}
-              </a>
-            ))}
-            <button
+            <a
+              key={item}
+              href={`/#${item.toLowerCase()}`}
+              // onClick={() => handleNavClick(item)}
+              className="text-[#4411C6] font-bold hover:text-[#191433] transition duration-150 ease-in-out py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[2px] after:bg-[#191433] after:transition-all after:duration-300 hover:after:w-full hover:after:left-0"
+            >
+              {item}
+            </a>
+          ))}
+          <button
             className="text-sm sm:text-base font-medium text-white bg-red-600 hover:bg-red-700 active:scale-95 px-4 py-2 rounded-xl cursor-pointer shadow-sm transition-all duration-200 flex items-center gap-2"
             onClick={() => handleSignOut()}
           >
-            <svg
-               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            Logout
+            <LogOut size={23} />
+            <p>Logout</p>
           </button>
         </nav>
       </header>
 
       {/* Hero Welcome Banner */}
-      <section className="w-full max-w-6xl
+      <section
+        className="w-full max-w-6xl
        border-b border-gray-900/15
        h-full
-       py-6 sm:py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+       py-6 sm:py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+      >
         <div className="space-y-2">
           <h1 className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight">
             Dashboard
           </h1>
           <h2 className="font-medium text-lg sm:text-2xl text-blue-950">
-            Welcome, <span className="font-bold text-blue-800">{user.name}</span>!
+            Welcome,{" "}
+            <span className="font-bold text-blue-800">{user.name}</span>!
           </h2>
           <p className="text-sm sm:text-base text-slate-800 pt-1">
             Check out our{" "}
@@ -221,13 +206,14 @@ function ClientCode({ user }: { user: UserType }) {
       {/* Events Two-Column Section */}
       <main className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
         {/* Registered Events Card */}
-        <div className="flex flex-col justify-between 
+        <div
+          className="flex flex-col justify-between 
         border-gray-500/20
-        sm:py-8 py-6 w-full gap-y-6">
+        sm:py-8 py-6 w-full gap-y-6"
+        >
           <div className="space-y-6">
             <div className="flex items-center justify-between pb-0">
               <div className="flex items-center gap-3">
-                
                 <h3 className="text-2xl font-bold text-blue-800">
                   Registered Events
                 </h3>
@@ -287,8 +273,6 @@ function ClientCode({ user }: { user: UserType }) {
                         <span>{e.eventDate}</span>
                       </div>
                     </div>
-
-
                   </div>
                 ))}
               </div>
@@ -298,23 +282,22 @@ function ClientCode({ user }: { user: UserType }) {
               </div>
             )}
 
-              <div className="w-full text-center px-3">
+            <div className="w-full text-center px-3">
               Before each event, the event link will be sent to your registered
               email!
             </div>
           </div>
-
-
         </div>
 
         {/* Upcoming Events Card */}
-        <div className="flex flex-col justify-between 
+        <div
+          className="flex flex-col justify-between 
         border-gray-500/20
-        sm:py-8 py-6 w-full gap-y-6">
+        sm:py-8 py-6 w-full gap-y-6"
+        >
           <div className="space-y-6">
             <div className="flex items-center justify-between  pb-0">
               <div className="flex items-center gap-3">
-                
                 <h3 className="text-2xl font-bold text-blue-800">
                   Upcoming Events
                 </h3>
