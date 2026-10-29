@@ -6,7 +6,100 @@ import toast from "react-hot-toast";
 import { validateForm } from "./formValidation";
 import { handleSignup } from "./signup";
 
+const OTHER = "Other";
+
+// Departments of Jadavpur University, grouped by faculty
+const DEPARTMENT_GROUPS: { label: string; options: string[] }[] = [
+  {
+    label: "Faculty of Arts",
+    options: [
+      "Adult, Continuing Education & Extension",
+      "Bengali",
+      "Comparative Literature",
+      "Economics",
+      "Education",
+      "English",
+      "Film Studies",
+      "History",
+      "International Relations",
+      "Library & Information Science",
+      "Linguistics",
+      "Philosophy",
+      "Physical Education",
+      "Sanskrit",
+      "Sociology",
+    ],
+  },
+  {
+    label: "Faculty of Science",
+    options: [
+      "Chemistry",
+      "Geological Sciences",
+      "Geography",
+      "Instrumentation Science",
+      "Life Science & Biotechnology",
+      "Mathematics",
+      "Physics",
+    ],
+  },
+  {
+    label: "Faculty of Engineering & Technology",
+    options: [
+      "Architecture",
+      "Chemical Engineering",
+      "Civil Engineering",
+      "Computer Science & Engineering",
+      "Construction Engineering",
+      "Electrical Engineering",
+      "Electronics & Telecommunication Engineering",
+      "Food Technology & Biochemical Engineering",
+      "Information Technology",
+      "Instrumentation & Electronics Engineering",
+      "Mechanical Engineering",
+      "Metallurgical & Material Engineering",
+      "Pharmaceutical Technology",
+      "Power Engineering",
+      "Printing Engineering",
+      "Production Engineering",
+    ],
+  },
+  {
+    label: "Interdisciplinary Schools",
+    options: [
+      "School of Bio-Science & Engineering",
+      "School of Cognitive Science",
+      "School of Energy Studies",
+      "School of Environmental Studies",
+      "School of Illumination Science, Engineering & Design",
+      "School of Laser Science & Engineering",
+      "School of Materials Science & Engineering",
+      "School of Mobile Communication & Computing",
+      "School of Nuclear Studies & Applications",
+      "School of Oceanographic Studies",
+      "School of Water Resources Engineering",
+      "School of Women's Studies",
+    ],
+  },
+];
+
+const YEARS = [
+  "UG1",
+  "UG2",
+  "UG3",
+  "UG4",
+  "PG1",
+  "PG2",
+  "PhD Scholar",
+  "Industrial Professional",
+];
+
+const fieldClass =
+  "w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600";
+
 export default function RegisterPage() {
+  // formData.dept always holds the FINAL department value
+  // (the dropdown choice, or the typed text when "Other" is selected),
+  // so validateForm and handleSignup keep working unchanged.
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,6 +109,8 @@ export default function RegisterPage() {
     year: "",
     phone: "",
   });
+  const [deptSelect, setDeptSelect] = useState("");
+  const [otherDept, setOtherDept] = useState("");
   const [status, setStatus] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
@@ -52,10 +147,21 @@ export default function RegisterPage() {
   };
 
   const handleChange = (field: string, value: string) => {
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [field]: value,
-    });
+    }));
+  };
+
+  const handleDeptSelect = (value: string) => {
+    setDeptSelect(value);
+    // If "Other", use whatever has been typed so far (empty until they type)
+    handleChange("dept", value === OTHER ? otherDept.trim() : value);
+  };
+
+  const handleOtherDept = (value: string) => {
+    setOtherDept(value);
+    handleChange("dept", value.trim());
   };
 
   return (
@@ -118,7 +224,7 @@ export default function RegisterPage() {
                 value={formData.name}
                 onChange={(e) => handleChange("name", e.target.value)}
                 placeholder="John Doe"
-                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
+                className={fieldClass}
               />
             </div>
 
@@ -132,7 +238,7 @@ export default function RegisterPage() {
                 value={formData.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 placeholder="johndoe@email.com"
-                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
+                className={fieldClass}
               />
             </div>
 
@@ -146,7 +252,7 @@ export default function RegisterPage() {
                 value={formData.password}
                 onChange={(e) => handleChange("password", e.target.value)}
                 placeholder="Enter password"
-                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
+                className={fieldClass}
               />
             </div>
 
@@ -160,36 +266,65 @@ export default function RegisterPage() {
                 value={formData.college}
                 onChange={(e) => handleChange("college", e.target.value)}
                 placeholder="Your College Name"
-                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
+                className={fieldClass}
               />
             </div>
 
-            {/* Department and Year Fields */}
-            <div className="flex gap-4">
-              <div className="flex-1">
-                <label className="block text-sm font-semibold text-gray-800 mb-2">
-                  Department
-                </label>
+            {/* Department Field */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-800 mb-2">
+                Department
+              </label>
+              <select
+                value={deptSelect}
+                onChange={(e) => handleDeptSelect(e.target.value)}
+                className={`${fieldClass} cursor-pointer`}
+              >
+                <option value="" disabled>
+                  Select your department
+                </option>
+                {DEPARTMENT_GROUPS.map((group) => (
+                  <optgroup key={group.label} label={group.label}>
+                    {group.options.map((dept) => (
+                      <option key={dept} value={dept}>
+                        {dept}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+                <option value={OTHER}>Other</option>
+              </select>
+
+              {deptSelect === OTHER && (
                 <input
                   type="text"
-                  value={formData.dept}
-                  onChange={(e) => handleChange("dept", e.target.value)}
-                  placeholder="CSE"
-                  className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
+                  value={otherDept}
+                  onChange={(e) => handleOtherDept(e.target.value)}
+                  placeholder="Enter your department"
+                  className={`${fieldClass} mt-3`}
                 />
-              </div>
-              <div className="flex-1">
-                <label className="block text-sm font-semibold text-gray-800 mb-2">
-                  Year
-                </label>
-                <input
-                  type="text"
-                  value={formData.year}
-                  onChange={(e) => handleChange("year", e.target.value)}
-                  placeholder="2nd"
-                  className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
-                />
-              </div>
+              )}
+            </div>
+
+            {/* Year Field */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-800 mb-2">
+                Year
+              </label>
+              <select
+                value={formData.year}
+                onChange={(e) => handleChange("year", e.target.value)}
+                className={`${fieldClass} cursor-pointer`}
+              >
+                <option value="" disabled>
+                  Select your year
+                </option>
+                {YEARS.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Phone Field */}
@@ -202,7 +337,7 @@ export default function RegisterPage() {
                 value={formData.phone}
                 onChange={(e) => handleChange("phone", e.target.value)}
                 placeholder="9876543210"
-                className="w-full px-4 py-3 rounded-full bg-purple-200 bg-opacity-50 border-2 border-purple-300 focus:outline-none focus:border-violet-500 text-gray-800 placeholder-gray-600"
+                className={fieldClass}
                 required
               />
             </div>
