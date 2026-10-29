@@ -7,7 +7,6 @@ import { FaWhatsapp } from "react-icons/fa6";
 //import { CarouselPlugin } from './Carousel';
 import RotatingText from "./RotatingText";
 import Carousel from "./Carousel";
-import MaskedHeading from "./MaskedHeading";
 import { LiquidButton } from "./liquidButton";
 import TextGradient from "./waveText21Dev";
 type NavItem = string;
