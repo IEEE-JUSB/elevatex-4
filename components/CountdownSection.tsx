@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 // Define the target date for the countdown
-const TARGET_DATE = new Date("November 29, 2026 00:00:00");
+const TARGET_DATE = new Date("November 14, 2026 00:00:00");
 
 interface TimeLeft {
   days: number;
@@ -79,7 +79,7 @@ export default function CountdownSection() {
     ),
   );
 
-  const targetDateString = "NOVEMBER 29, 2026";
+  const targetDateString = "NOVEMBER 14, 2026";
 
   return (
     <section className="bg-white py-8 md:py-10 border-t-2 border-b-2 border-dashed border-gray-700 font-manrope">
