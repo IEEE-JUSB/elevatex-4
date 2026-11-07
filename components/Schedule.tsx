@@ -62,27 +62,27 @@ import React from "react";
 const seminars = [
   {
     title: "Inside the IIM Playbook",
-    speaker: "Agniv Da × Erudite",
+    speaker: "by Agniv Ghosh × Erudite",
     date: "14/11/2026",
-    timing: "TBA",
+    timing: "6:00pm to 7:00pm",
   },
   {
     title: "Policy Beyond Borders",
-    speaker: "Urwah di",
+    speaker: "by Urwah Jawaid",
     date: "18/11/2026",
-    timing: "TBA",
+    timing: "6:00pm to 7:00pm",
   },
   {
     title: "Algorithms behind Intelligence",
-    speaker: "Avirup Da",
+    speaker: "by Avirup Nandi",
     date: "20/11/2026",
-    timing: "TBA",
+    timing: "7:00pm to 8:00pm",
   },
   {
     title: "India's Space Odyssey",
-    speaker: "ISRO Scientist",
+    speaker: "",
     date: "22/11/2026",
-    timing: "TBA",
+    timing: "6:00pm to 7:00pm",
   },
 ];
 
@@ -124,7 +124,7 @@ export default function Schedule() {
                 {seminar.title}
               </h3>
               <p className="sm:text-lg font-bold text-gray-600">
-                by {seminar.speaker}
+                {seminar.speaker}
               </p>
             </div>
             {/* <Image

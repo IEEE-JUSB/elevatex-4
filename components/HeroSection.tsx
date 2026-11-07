@@ -27,16 +27,21 @@ const HeroSection: FC = () => {
   const handleDotClick = (index: number): void => {
     setActiveDot(index);
   };
+  // const items = [
+  //   { image: "/speakers/ansh.jpg", alt: "Speaker portrait" },
+  //   { image: "/speakers/chirag.jpeg", alt: "Speaker portrait" },
+  //   { image: "/speakers/nandini.JPG", alt: "Speaker portrait" },
+  //   { image: "/speakers/pani_da.jpg", alt: "Speaker portrait" },
+  //   { image: "/speakers/punit.jpg", alt: "Speaker portrait" },
+  //   { image: "/speakers/rahul.jpeg", alt: "Speaker portrait" },
+  //   { image: "/speakers/raman.jpg", alt: "Speaker portrait" },
+  //   { image: "/speakers/sayandeep.jpeg", alt: "Speaker portrait" },
+  //   { image: "/speakers/soumyadeep.jpeg", alt: "Speaker portrait" },
+  // ];
   const items = [
-    { image: "/speakers/ansh.jpg", alt: "Speaker portrait" },
-    { image: "/speakers/chirag.jpeg", alt: "Speaker portrait" },
-    { image: "/speakers/nandini.JPG", alt: "Speaker portrait" },
-    { image: "/speakers/pani_da.jpg", alt: "Speaker portrait" },
-    { image: "/speakers/punit.jpg", alt: "Speaker portrait" },
-    { image: "/speakers/rahul.jpeg", alt: "Speaker portrait" },
-    { image: "/speakers/raman.jpg", alt: "Speaker portrait" },
-    { image: "/speakers/sayandeep.jpeg", alt: "Speaker portrait" },
-    { image: "/speakers/soumyadeep.jpeg", alt: "Speaker portrait" },
+    { image: "/speakers/avirup2026.jpg", alt: "Speaker portrait" },
+    { image: "/speakers/agniv2026.png", alt: "Speaker portrait" },
+    { image: "/speakers/urwah2026.png", alt: "Speaker portrait" },
   ];
 
   return (
