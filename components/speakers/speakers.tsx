@@ -62,28 +62,27 @@ interface Speaker {
 //     },
 //   ];
 
-  const Speakers: React.FC = () => {
-    const speakers: Speaker[] = [
-      {
-        image: "/speakers/agniv2026.png",
-        name: "Agniv Ghosh",
-        url: "https://www.linkedin.com/in/agnivghosh157/",
-        designation: "IIM Bangalore'27 | JU CSE'23 ",
-      },
-      {
-        image: "/speakers/avirup2026.jpg",
-        name: "Avirup Nandi",
-        url: "https://www.linkedin.com/in/avirup-nandi-2266a8224/",
-        designation: "Technical Product Engineer at Channelplay",
-      },
-      {
-        image: "/speakers/urwah2026.png",
-        name: "Urwah Jawaid",
-        url: "https://www.linkedin.com/in/urwah-jawaid/",
-        designation: "Communications | Writer & Editor | Engineer",
-      },
-    ]
-    
+const Speakers: React.FC = () => {
+  const speakers: Speaker[] = [
+    {
+      image: "/speakers/agniv2026.png",
+      name: "Agniv Ghosh",
+      url: "https://www.linkedin.com/in/agnivghosh157/",
+      designation: "IIM Bangalore'27 | JU CSE'23 ",
+    },
+    {
+      image: "/speakers/avirup2026.jpg",
+      name: "Avirup Nandi",
+      url: "https://www.linkedin.com/in/avirup-nandi-2266a8224/",
+      designation: "Technical Product Engineer at Channelplay",
+    },
+    {
+      image: "/speakers/urwah2026.png",
+      name: "Urwah Jawaid",
+      url: "https://www.linkedin.com/in/urwah-jawaid/",
+      designation: "Communications | Writer & Editor | Engineer",
+    },
+  ];
 
   return (
     <div id="speakers" className="min-h-screen pt-10">
