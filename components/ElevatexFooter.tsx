@@ -63,6 +63,12 @@ function ElevatexFooter() {
               <span>&gt;</span> Speakers
             </Link>
             <Link
+              href="/past-editions"
+              className="flex items-center gap-x-2 hover:text-blue-300 transition-colors duration-150"
+            >
+              <span>&gt;</span> Past Editions
+            </Link>
+            <Link
               href="/#schedule"
               className="flex items-center gap-x-2 hover:text-blue-300 transition-colors duration-150"
             >
