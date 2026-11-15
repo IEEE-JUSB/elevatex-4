@@ -18,7 +18,7 @@ const HeroSection: FC = () => {
     "Contact",
     "Speakers",
     "Schedule",
-    "Past Editions"
+    "Past Editions",
   ];
   const [activeDot, setActiveDot] = useState(0);
   const handleNavClick = (item: NavItem): void => {
@@ -87,7 +87,11 @@ const HeroSection: FC = () => {
             {navItems.map((item: NavItem) => (
               <a
                 key={item}
-                href={item=="Past Editions"?`/past-editions`:`#${item.toLowerCase()}`}
+                href={
+                  item == "Past Editions"
+                    ? `/past-editions`
+                    : `#${item.toLowerCase()}`
+                }
                 onClick={() => handleNavClick(item)}
                 className="text-gray-200 hover:text-[#191433] transition duration-150 ease-in-out py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[2px] after:bg-[#191433] after:transition-all after:duration-300 hover:after:w-full hover:after:left-0"
               >

@@ -7,56 +7,56 @@ const speakers = [
     image: "/speakers/raman.jpg",
     designation: "City Head at Jamboree Education India",
     session: "In The Horizon: The Postgrad Fork",
-    url: "https://www.linkedin.com/in/raman-trivedi-530a871a5/"
+    url: "https://www.linkedin.com/in/raman-trivedi-530a871a5/",
   },
   {
     name: "Soumyadeep Pal",
     image: "/speakers/soumyadeep.jpeg",
     designation: "CAT 99.9 percentile, IIM Calcutta",
     session: "Decoding CAT: the Top 0.1% Paradox Unmasked",
-    url: "https://www.linkedin.com/in/realspal/"
+    url: "https://www.linkedin.com/in/realspal/",
   },
   {
     name: "Sayandeep Sarkar",
     image: "/speakers/sayandeep.jpeg",
     designation: "Software Engineer at ICICI Bank",
     session: "CareerOS: Building Resume_Placement.exe",
-    url: "https://www.linkedin.com/in/sayandeep-sarkar-530688201/"
+    url: "https://www.linkedin.com/in/sayandeep-sarkar-530688201/",
   },
   {
     name: "Rahul Halder",
     image: "/speakers/rahul.jpeg",
     designation: "Associate Consultant at PwC",
     session: "The Big Data Equation: Thinking Beyond Spreadsheets",
-    url: "https://www.linkedin.com/in/rahul-halder-95a7ab147/"
+    url: "https://www.linkedin.com/in/rahul-halder-95a7ab147/",
   },
   {
     name: "Nandini Bagga",
     image: "/speakers/nandini.JPG",
     designation: "Software Engineer in Tokyo",
     session: "Sakura Opportunities: Scholarships and SDEs in Japan",
-    url: "https://www.linkedin.com/in/nandini-bagga-0803/"
+    url: "https://www.linkedin.com/in/nandini-bagga-0803/",
   },
   {
     name: "Saptarshi Pani",
     image: "/speakers/pani_da.jpg",
     designation: "Chief Data and Research Scientist at Alchemyst AI",
     session: "AI/ML: Mind over Model",
-    url: "https://www.linkedin.com/in/panisap/"
+    url: "https://www.linkedin.com/in/panisap/",
   },
   {
     name: "Ansh Sarkar",
     image: "/speakers/ansh.jpg",
     designation: "C4GT mentor and mentee",
     session: "Let's Git Going: Sneak Peek Into Open Source",
-    url: "https://www.linkedin.com/in/ansh-sarkar/"
+    url: "https://www.linkedin.com/in/ansh-sarkar/",
   },
   {
     name: "Punit Chawla",
     image: "/speakers/punit.jpg",
     designation: "Founder of Designwings UX/UI School",
     session: "Decode UI/UX",
-    url: "https://youtube.com/@punitchawla?si=FbP6lm6Ke5LgnR3c"
+    url: "https://youtube.com/@punitchawla?si=FbP6lm6Ke5LgnR3c",
   },
 ];
 
@@ -73,7 +73,8 @@ export default function PastSpeakers() {
           </h1>
           <p className="mt-4 max-w-xl leading-6 text-[#625e70] text-lg">
             Meet the people and ideas that have shaped the{" "}
-            <span className="font-semibold text-purple-700">ElevateX</span> stage.
+            <span className="font-semibold text-purple-700">ElevateX</span>{" "}
+            stage.
           </p>
         </header>
 
@@ -122,9 +123,14 @@ export default function PastSpeakers() {
                       {speaker.session}
                     </p>
                   </div>
-                  <Button className="font-syne cursor-pointer hover:bg-violet-900"
-                  onClick={() => window.open(speaker.url, "_blank", "noopener,noreferrer")}
-                  >Visit social media</Button>
+                  <Button
+                    className="font-syne cursor-pointer hover:bg-violet-900"
+                    onClick={() =>
+                      window.open(speaker.url, "_blank", "noopener,noreferrer")
+                    }
+                  >
+                    Visit social media
+                  </Button>
                 </div>
               }
             />
