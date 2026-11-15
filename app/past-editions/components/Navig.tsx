@@ -10,6 +10,7 @@ export default function Navig() {
       "Contact",
       "Speakers",
       "Schedule",
+      "Past Editions"
     ];
     const [activeDot, setActiveDot] = useState(0);
     const handleNavClick = (item: NavItem): void => {
@@ -53,7 +54,7 @@ export default function Navig() {
             {navItems.map((item: NavItem) => (
               <a
                 key={item}
-                href={`${process.env.BETTER_AUTH_URL}#${item.toLowerCase()}`}
+                href={item=="Past Editions"?`/past-editions`:`${process.env.BETTER_AUTH_URL}#${item.toLowerCase()}`}
                 onClick={() => handleNavClick(item)}
                 className="text-black hover:text-blue-700 transition duration-150 ease-in-out py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[2px] after:bg-[#191433] after:transition-all after:duration-300 hover:after:w-full hover:after:left-0"
               >
